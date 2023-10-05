@@ -8,7 +8,7 @@ const TRANSITION_FREEZE_TIME = 0.2
 
 
 var prev_target_pos = Vector2(0, 0)
-var time_since_transition = TRANSITION_FREEZE_TIME
+var time_since_transition = 999.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +19,7 @@ func _ready():
 func _process(delta):
 	time_since_transition += delta
 	
-	var player_pos = $"../World/Player".position
+	var player_pos: Vector2 = $"../World/Player".position
 	var target_pos: Vector2 = round(player_pos / SCREEN_SIZE) * SCREEN_SIZE
 	
 	if !target_pos.is_equal_approx(prev_target_pos):
