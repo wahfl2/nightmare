@@ -1,5 +1,6 @@
 extends Camera2D
 
+
 const SCREEN_SIZE = Vector2(1920, 1080)
 const CAM_MOVE_DELTA = 0.001
 const CAM_POS_EPSILON = 7.5
@@ -8,9 +9,6 @@ const TRANSITION_FREEZE_TIME = 0.2
 var prev_target_pos = Vector2(0, 0)
 var time_since_transition = TRANSITION_FREEZE_TIME
 
-func is_within_epsilon(left: Vector2, right: Vector2, epsilon: float):
-	return right.x >= (left.x - epsilon) && right.x <= (left.x + epsilon) && \
-		right.y >= (left.y - epsilon) && right.y <= (left.y + epsilon)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
