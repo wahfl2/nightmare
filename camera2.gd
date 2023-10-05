@@ -6,9 +6,9 @@ const CAM_MOVE_DELTA = 0.001
 const CAM_POS_EPSILON = 7.5
 const TRANSITION_FREEZE_TIME = 0.2
 
+
 var prev_target_pos = Vector2(0, 0)
 var time_since_transition = TRANSITION_FREEZE_TIME
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
