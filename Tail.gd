@@ -1,35 +1,34 @@
-extends MeshInstance2D
+extends Polygon2D
 
-
-const TAIL_ORIGIN = Vector2(0, -10)
-const TAIL_START_RADIUS = 25.0
-const TAIL_LENGTH = 100.0
-const TAIL_MESH_RES = 30
-
-
-func add_vertex2(st: SurfaceTool, v: Vector2):
-	st.add_vertex(Vector3(v.x, v.y, 0))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
-	st.set_color(Color.WHITE)
+	pass # Replace with function body.
 
-	add_vertex2(st, TAIL_ORIGIN + Vector2(0, TAIL_START_RADIUS))
-	for i in TAIL_MESH_RES:
-		var delta = i / float(TAIL_MESH_RES)
-		var y_add = (1.0 - delta) * TAIL_START_RADIUS
-		y_add *= (i % 2) * 2 - 1
-
-		var x_add = delta * TAIL_LENGTH
-		add_vertex2(st, TAIL_ORIGIN + Vector2(x_add, y_add))
-
-	mesh = st.commit()
-
+func atan2vec(v: Vector2) -> float:
+	return atan2(v.y, v.x)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var player_vel: Vector2 = $"..".velocity
+	var point = -player_vel
 
-	pass
+	var angle0 = atan2vec(point * Vector2(1.0, 0.1))
+	var angle1 = atan2vec(point * Vector2(1.0, 0.25)) - angle0
+	var angle2 = atan2vec(point * Vector2(1.0, 0.5)) - angle1 - angle0
+	var angle3 = atan2vec(point * Vector2(1.0, 1.0)) - angle2 - angle1 - angle0
+
+	var skel = get_node(self.skeleton)
+
+	var bone0: Bone2D = skel.find_child("b0")
+	bone0.rotation += (angle0 - bone0.rotation) / 1000
+
+	var bone1: Bone2D = skel.find_child("b1")
+	bone1.rotation += (angle1 - bone1.rotation) / 1000
+
+	var bone2: Bone2D = skel.find_child("b2")
+	bone2.rotation += (angle2 - bone2.rotation) / 1000
+
+	var bone3: Bone2D = skel.find_child("b3")
+	bone3.rotation += (angle3 - bone3.rotation) / 1000

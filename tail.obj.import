@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpmc2secwxb1k"
+path="res://.godot/imported/tail.obj-3599fd0c219954f91aa4e3d4ae264701.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tail.obj-3599fd0c219954f91aa4e3d4ae264701.mesh"]
+
+source_file="res://tail.obj"
+dest_files=["res://.godot/imported/tail.obj-3599fd0c219954f91aa4e3d4ae264701.mesh", "res://.godot/imported/tail.obj-3599fd0c219954f91aa4e3d4ae264701.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

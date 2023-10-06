@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://drsd83xo1lmlb"]
+[gd_scene load_steps=10 format=3 uid="uid://drsd83xo1lmlb"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_e3vgh"]
 [ext_resource type="Script" path="res://camera2.gd" id="2_iciky"]
 [ext_resource type="Script" path="res://Tail.gd" id="3_dygdw"]
+[ext_resource type="Texture2D" uid="uid://d35mkxaaim86a" path="res://white_tex.png" id="3_vo0nk"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_cfhte"]
 
@@ -12,13 +13,9 @@ colors = PackedColorArray(0.423529, 0.427451, 0.498039, 1, 0.16026, 0.162461, 0.
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_i1lwt"]
 gradient = SubResource("Gradient_y8stw")
 
-[sub_resource type="QuadMesh" id="QuadMesh_qsauu"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn7dh"]
 radius = 20.0
 height = 76.0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_rc73b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lifuj"]
 size = Vector2(3578, 176)
@@ -41,24 +38,53 @@ texture = SubResource("GradientTexture1D_i1lwt")
 [node name="World" type="Node2D" parent="."]
 
 [node name="Player" type="CharacterBody2D" parent="World"]
-position = Vector2(-1, -61)
+position = Vector2(-2, -61)
 script = ExtResource("1_e3vgh")
 
-[node name="Mesh" type="MeshInstance2D" parent="World/Player"]
-position = Vector2(-1.90735e-06, -1.23978e-05)
-scale = Vector2(40, 76)
-mesh = SubResource("QuadMesh_qsauu")
-
 [node name="Collider" type="CollisionShape2D" parent="World/Player"]
-position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_rn7dh")
 
-[node name="Tail" type="MeshInstance2D" parent="World/Player"]
-mesh = SubResource("ArrayMesh_rc73b")
+[node name="tail_skeleton" type="Skeleton2D" parent="World/Player"]
+position = Vector2(9.53674e-07, 18)
+scale = Vector2(1, 0.982255)
+
+[node name="b0" type="Bone2D" parent="World/Player/tail_skeleton"]
+position = Vector2(-9.53674e-07, 0)
+rest = Transform2D(1, 0, 0, 1, -9.53674e-07, 0)
+
+[node name="b1" type="Bone2D" parent="World/Player/tail_skeleton/b0"]
+position = Vector2(20, 0)
+rest = Transform2D(1, 0, 0, 1, 20, 0)
+
+[node name="b2" type="Bone2D" parent="World/Player/tail_skeleton/b0/b1"]
+position = Vector2(20, 0)
+rest = Transform2D(1, 0, 0, 1, 20, 0)
+
+[node name="b3" type="Bone2D" parent="World/Player/tail_skeleton/b0/b1/b2"]
+position = Vector2(20, 0)
+rest = Transform2D(1, 0, 0, 1, 20, 0)
+
+[node name="end" type="Bone2D" parent="World/Player/tail_skeleton/b0/b1/b2/b3"]
+position = Vector2(20, 0)
+rest = Transform2D(1, 0, 0, 1, 20, 0)
+auto_calculate_length_and_angle = false
+length = 1.0
+bone_angle = 0.0
+
+[node name="tail" type="Polygon2D" parent="World/Player"]
+texture = ExtResource("3_vo0nk")
+skeleton = NodePath("../tail_skeleton")
+polygon = PackedVector2Array(0, 38, 0, -2, 19, 3, 36, 8, 50.8758, 11.4471, 64.5188, 14.5167, 80, 18, 64.8419, 21.7895, 51.2857, 25.1786, 34.9143, 29.2714, 18.6214, 33.3447)
+uv = PackedVector2Array(5.11764, 38.69, 0.436687, 0.329313, 18.547, 4.17308, 34.3491, 7.72855, 50.8758, 11.4471, 64.5188, 14.5167, 80, 18, 64.8419, 21.7895, 51.2857, 25.1786, 34.9143, 29.2714, 18.6214, 33.3447)
+polygons = [PackedInt32Array(1, 10, 0), PackedInt32Array(1, 2, 10), PackedInt32Array(2, 9, 3), PackedInt32Array(2, 10, 9), PackedInt32Array(3, 4, 9), PackedInt32Array(4, 9, 8), PackedInt32Array(5, 4, 8), PackedInt32Array(5, 8, 7), PackedInt32Array(5, 6, 7)]
+bones = ["b0", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1), "b0/b1", PackedFloat32Array(0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1), "b0/b1/b2", PackedFloat32Array(0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0), "b0/b1/b2/b3", PackedFloat32Array(0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0), "b0/b1/b2/b3/end", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 script = ExtResource("3_dygdw")
 
+[node name="body" type="Polygon2D" parent="World/Player"]
+polygon = PackedVector2Array(-20, 18, -17, 28, -10, 35, 0, 38, 10, 35, 17, 28, 20, 18, 20, -18, 17, -28, 10, -35, 0, -38, -10, -35, -17, -28, -20, -18)
+
 [node name="Level" type="StaticBody2D" parent="World"]
-position = Vector2(18, 459)
+position = Vector2(17, 459)
 
 [node name="Collider" type="CollisionShape2D" parent="World/Level"]
 position = Vector2(-18, 45)
