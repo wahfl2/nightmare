@@ -19,7 +19,7 @@ func _ready():
 func _process(delta):
 	time_since_transition += delta
 	
-	var player_pos: Vector2 = $"../World/Player".position
+	var player_pos: Vector2 = $"../World/PlayerCollection/Player".position
 	var target_pos: Vector2 = round(player_pos / SCREEN_SIZE) * SCREEN_SIZE
 	
 	if !target_pos.is_equal_approx(prev_target_pos):
