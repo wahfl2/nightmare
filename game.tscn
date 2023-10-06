@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://drsd83xo1lmlb"]
+[gd_scene load_steps=11 format=3 uid="uid://drsd83xo1lmlb"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_e3vgh"]
 [ext_resource type="Script" path="res://camera2.gd" id="2_iciky"]
+[ext_resource type="Script" path="res://Tail.gd" id="3_dygdw"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_cfhte"]
 
@@ -16,6 +17,8 @@ gradient = SubResource("Gradient_y8stw")
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn7dh"]
 radius = 20.0
 height = 76.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rc73b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lifuj"]
 size = Vector2(3578, 176)
@@ -47,7 +50,12 @@ scale = Vector2(40, 76)
 mesh = SubResource("QuadMesh_qsauu")
 
 [node name="Collider" type="CollisionShape2D" parent="World/Player"]
+position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_rn7dh")
+
+[node name="Tail" type="MeshInstance2D" parent="World/Player"]
+mesh = SubResource("ArrayMesh_rc73b")
+script = ExtResource("3_dygdw")
 
 [node name="Level" type="StaticBody2D" parent="World"]
 position = Vector2(18, 459)

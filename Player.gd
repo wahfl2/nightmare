@@ -12,8 +12,8 @@ const GROUND_DAMP = Vector2(0.0005, 1.0)
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func vec2_pow(v: Vector2, exp: float):
-	return Vector2(pow(v.x, exp), pow(v.y, exp))
+func vec2_pow(v: Vector2, exponent: float):
+	return Vector2(pow(v.x, exponent), pow(v.y, exponent))
 
 func _physics_process(delta):
 	if is_on_floor():
